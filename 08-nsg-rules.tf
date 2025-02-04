@@ -57,48 +57,48 @@ resource "azurerm_network_security_rule" "bastion" {
 }
 
 # NSG for VPN Gateway Subnet
-resource "azurerm_network_security_group" "vpn_nsg" {
-  name                = "Hub-VPN-NSG"
-  location            = "eastus"
-  resource_group_name = "rg-hub-eastus"
-}
+# resource "azurerm_network_security_group" "vpn_nsg" {
+#   name                = "Hub-VPN-NSG"
+#   location            = "eastus"
+#   resource_group_name = "rg-hub-eastus"
+# }
 
-# Allow VPN Gateway Traffic
-resource "azurerm_network_security_rule" "vpn_gateway" {
-  name                        = "Allow-VPN-GW"
-  priority                    = 1030
-  direction                   = "Inbound"
-  access                      = "Allow"
-  protocol                    = "*"
-  source_port_range           = "*"
-  destination_port_range      = "*"
-  source_address_prefix       = "*"
-  destination_address_prefix  = "10.110.70.0/24"
-  network_security_group_name = azurerm_network_security_group.vpn_nsg.name
-  resource_group_name         = "rg-hub-eastus"
-}
+# # Allow VPN Gateway Traffic
+# resource "azurerm_network_security_rule" "vpn_gateway" {
+#   name                        = "Allow-VPN-GW"
+#   priority                    = 1030
+#   direction                   = "Inbound"
+#   access                      = "Allow"
+#   protocol                    = "*"
+#   source_port_range           = "*"
+#   destination_port_range      = "*"
+#   source_address_prefix       = "*"
+#   destination_address_prefix  = "10.110.70.0/24"
+#   network_security_group_name = azurerm_network_security_group.vpn_nsg.name
+#   resource_group_name         = "rg-hub-eastus"
+# }
 
 # NSG for Azure Firewall Subnet (Allow All)
-resource "azurerm_network_security_group" "firewall_nsg" {
-  name                = "Hub-Firewall-NSG"
-  location            = "eastus"
-  resource_group_name = "rg-hub-eastus"
-}
+# resource "azurerm_network_security_group" "firewall_nsg" {
+#   name                = "Hub-Firewall-NSG"
+#   location            = "eastus"
+#   resource_group_name = "rg-hub-eastus"
+# }
 
-# Allow Azure Firewall Subnet Traffic
-resource "azurerm_network_security_rule" "azure_firewall" {
-  name                        = "Allow-AzureFW"
-  priority                    = 1040
-  direction                   = "Inbound"
-  access                      = "Allow"
-  protocol                    = "*"
-  source_port_range           = "*"
-  destination_port_range      = "*"
-  source_address_prefix       = "*"
-  destination_address_prefix  = "10.110.90.0/24"
-  network_security_group_name = azurerm_network_security_group.firewall_nsg.name
-  resource_group_name         = "rg-hub-eastus"
-}
+# # Allow Azure Firewall Subnet Traffic
+# resource "azurerm_network_security_rule" "azure_firewall" {
+#   name                        = "Allow-AzureFW"
+#   priority                    = 1040
+#   direction                   = "Inbound"
+#   access                      = "Allow"
+#   protocol                    = "*"
+#   source_port_range           = "*"
+#   destination_port_range      = "*"
+#   source_address_prefix       = "*"
+#   destination_address_prefix  = "*"
+#   network_security_group_name = azurerm_network_security_group.firewall_nsg.name
+#   resource_group_name         = "rg-hub-eastus"
+# }
 
 # Allow Virtual Network Traffic (VNet Peering)
 resource "azurerm_network_security_rule" "allow_vnet" {
@@ -141,25 +141,11 @@ resource "azurerm_subnet_network_security_group_association" "hub_vnet_vm_snet_n
   depends_on = [ azurerm_network_security_group.vm_nsg ]
 }
 
-# Bastion Subnet NSG Association
-resource "azurerm_subnet_network_security_group_association" "hub_bastion_snet_nsg_association" {
-  subnet_id                 = azurerm_subnet.bastion_subnet.id
-  network_security_group_id = azurerm_network_security_group.bastion_nsg.id
-  depends_on = [ azurerm_network_security_group.bastion_nsg ]
-}
+# # Bastion Subnet NSG Association
+# resource "azurerm_subnet_network_security_group_association" "hub_bastion_snet_nsg_association" {
+#   subnet_id                 = azurerm_subnet.bastion_subnet.id
+#   network_security_group_id = azurerm_network_security_group.bastion_nsg.id
+#   depends_on = [ azurerm_network_security_group.bastion_nsg ]
+# }
 
-# VPN Gateway Subnet NSG Association
-resource "azurerm_subnet_network_security_group_association" "hub_vpn_gateway_snet_nsg_association" {
-  subnet_id                 = azurerm_subnet.gateway_subnet.id
-  network_security_group_id = azurerm_network_security_group.vpn_nsg.id
-  depends_on = [ azurerm_network_security_group.vpn_nsg ]
-}
-
-# Azure Firewall Subnet NSG Association
-
-resource "azurerm_subnet_network_security_group_association" "hub_firewall_snet_nsg_association" {
-  subnet_id                 = azurerm_subnet.firewall_subnet.id
-  network_security_group_id = azurerm_network_security_group.firewall_nsg.id
-  depends_on = [ azurerm_network_security_group.firewall_nsg ]
-}
 

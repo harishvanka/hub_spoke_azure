@@ -1,6 +1,6 @@
 resource "azurerm_virtual_network" "uat_spoke" {
   name                = "vnet-uat-spoke-emvptec-eastus"
-  resource_group_name = "Fusion-AppsandServices-UAT"
+  resource_group_name = "rg-hub-eastus"
   location            = "East US"
   address_space       = ["10.160.0.0/16"]
   tags = {
@@ -12,8 +12,8 @@ resource "azurerm_virtual_network" "uat_spoke" {
 
 resource "azurerm_subnet" "uat_default_subnet" {
   name                 = "DefaultSubnet"
-  resource_group_name  = "Fusion-AppsandServices-UAT"
-  virtual_network_name = azurerm_virtual_network.dev_spoke.name
+  resource_group_name  = "rg-hub-eastus"
+  virtual_network_name = azurerm_virtual_network.uat_spoke.name
   address_prefixes     = ["10.160.10.0/24"]
   private_endpoint_network_policies = "Enabled"
 }

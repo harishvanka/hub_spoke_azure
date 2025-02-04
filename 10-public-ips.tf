@@ -1,7 +1,7 @@
 # resource "azurerm_public_ip" "bastion_pip" {
 #   name                    = local.resource_names.pip_bastion
 #   location                = "eastus"
-#   resource_group_name     = "Fusion-AppsandServices-UAT"
+#   resource_group_name     = "rg-hub-eastus"
 #   sku                     = "Standard"
 #   allocation_method       = "Dynamic"
 #   idle_timeout_in_minutes = 4
@@ -11,7 +11,7 @@
 # resource "azurerm_public_ip" "pip_hub_firewall" {
 #   name                    = local.resource_names.pip_hub_firewall
 #   location                = "eastus"
-#   resource_group_name     = "Fusion-AppsandServices-UAT"
+#   resource_group_name     = "rg-hub-eastus"
 #   sku                     = "Standard"
 #   allocation_method       = "Dynamic"
 #   idle_timeout_in_minutes = 4
@@ -22,7 +22,7 @@
 # resource "azurerm_public_ip" "pip_hub_vpn_gateway_eastus_1" {
 #   name                    = local.resource_names.pip_hub_vpn_gateway_eastus_1
 #   location                = "eastus"
-#   resource_group_name     = "Fusion-AppsandServices-UAT"
+#   resource_group_name     = "rg-hub-eastus"
 #   sku                     = "Standard"
 #   allocation_method       = "Dynamic"
 #   idle_timeout_in_minutes = 4
@@ -33,7 +33,7 @@
 # resource "azurerm_public_ip" "pip_hub_vpn_gateway_eastus_2" {
 #   name                    = local.resource_names.pip_hub_vpn_gateway_eastus_2
 #   location                = "eastus"
-#   resource_group_name     = "Fusion-AppsandServices-UAT"
+#   resource_group_name     = "rg-hub-eastus"
 #   sku                     = "Standard"
 #   allocation_method       = "Dynamic"
 #   idle_timeout_in_minutes = 4

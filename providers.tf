@@ -9,6 +9,6 @@ terraform {
 
 provider "azurerm" {
   resource_provider_registrations = "core"
-  subscription_id = "xxxxx-xxxx-xxxx-xxxx-xxxxx"
+  subscription_id = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
   features {}
 }
